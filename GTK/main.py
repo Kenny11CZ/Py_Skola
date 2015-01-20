@@ -35,6 +35,23 @@ class Window(gtk.Window):
 	
 			
 		self.main_layout.pack_start(self.menu, 0, 0, True);
+		#Toolbar
+		self.toolbar = gtk.Toolbar()
+		self.toolbar.close = gtk.ToolButton(gtk.STOCK_CLOSE)
+		self.toolbar.close.connect("clicked", gtk.main_quit)
+		
+		self.toolbar.reset = gtk.ToolButton(gtk.STOCK_DELETE)
+		self.toolbar.reset.connect("clicked", self.reset_stistknut)
+		
+		self.toolbar.navys = gtk.ToolButton(gtk.STOCK_GOTO_TOP)
+		self.toolbar.navys.connect("clicked", self.tlacitko_stisknuto)
+		
+		
+		self.main_layout.pack_end(self.toolbar, 0, 0, True)
+		
+		self.toolbar.insert(self.toolbar.close, 0)
+		self.toolbar.insert(self.toolbar.reset, 0)
+		self.toolbar.insert(self.toolbar.navys, 0)
 		
 		self.tlacitko = gtk.Button("Zmackni me")
 		self.tlacitko.connect("clicked", self.tlacitko_stisknuto)
