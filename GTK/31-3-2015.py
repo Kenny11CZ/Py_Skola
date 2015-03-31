@@ -65,10 +65,16 @@ class Window(gtk.Window):
 		dialog.get_content_area().pack_start(dialog.vstup)
 		
 		dialog.vstup.show()
-		res = dialog.run()
+		while(True):
+			res = dialog.run()
+			if((res == gtk.RESPONSE_CANCEL) or ((res==gtk.RESPONSE_OK) and len(dialog.vstup.get_text().split(" ")) == 2)):
+				break;
+			else:
+				errord = gtk.MessageDialog(message_format = "Chybne jmeno", buttons=gtk.BUTTONS_OK)
+				result = errord.run()
+				errord.destroy()
 		if(res == gtk.RESPONSE_OK):
 			self.model.append(None,dialog.vstup.get_text().split(" "))
-		
 		dialog.destroy()
 		
 		
